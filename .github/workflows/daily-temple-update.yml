@@ -1,0 +1,37 @@
+name: 	daily-temple-update.yml
+
+name: 	daily-temple-update.yml
+
+on:
+  schedule:
+    # every hour
+    - cron: '0 * * * *'
+
+jobs:
+  check_in:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout temple bot
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run daily check-in
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          DISCORD_SERVER_ID: '7AZZMhTqA6'
+        run: |
+          node scripts/dailyCheckIn.js
+
+      - name: Await approval
+        # Placeholder: your script will post the briefing and await your 	reaction
+        run: echo "	Awaiting your approval reaction in #6ol-briefings	"
