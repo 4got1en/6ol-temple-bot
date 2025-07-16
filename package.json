@@ -2,9 +2,9 @@
   "name": "6ol-temple-bot",
   "version": "1.0.0",
   "description": "A Discord bot for daily temple check-ins.",
-  "main": "scripts/dailyCheckIn.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node scripts/dailyCheckIn.js"
+    "start": "node index.js"
   },
   "author": "4got1en",
   "license": "MIT",
