@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: 6ol-temple
+    runtime: node
+    plan: free
+    repo: https://github.com/4got1en/6ol-temple-bot
+    branch: main
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
