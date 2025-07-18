@@ -38,8 +38,37 @@ module.exports = {
       // Load configuration
       let config;
       try {
-        config = await configManager.loadConfig();
+        config = await configManager.loadConfig(configName);
+        
+        if (configName) {
+          await interaction.editReply({
+            content: `🔧 Using custom configuration: **${configName}**\n\nLoading configuration...`
+          });
+        }
       } catch (error) {
+        if (configName && error.message.includes('not found')) {
+          // Show available configurations
+          try {
+            const availableConfigs = await configManager.listAvailableConfigs();
+            let errorMsg = `❌ Configuration "${configName}" not found.\n\n`;
+            
+            if (availableConfigs.length > 0) {
+              errorMsg += 'Available configurations:\n';
+              availableConfigs.forEach(config => {
+                errorMsg += `• **${config.name}** (${config.file})\n`;
+              });
+            } else {
+              errorMsg += 'No configuration files found. Please create a `server-config.json` file.';
+            }
+            
+            return await interaction.editReply({ content: errorMsg });
+          } catch (listError) {
+            return await interaction.editReply({
+              content: `❌ Configuration error: ${error.message}`
+            });
+          }
+        }
+        
         return await interaction.editReply({
           content: `❌ Configuration error: ${error.message}\n\nPlease ensure you have a valid \`server-config.json\` file.`
         });
@@ -55,12 +84,12 @@ module.exports = {
 
       // Custom configuration handling (if specified)
       if (configName) {
-        return await interaction.editReply({
-          content: `❌ Custom configurations are not yet implemented. Using default configuration.`
+        await interaction.editReply({
+          content: `🔧 **Using Custom Configuration: ${configName}**\n\n` + 
+                  (testMode ? '🧪 **Test Mode Enabled** - Performing dry run...\n\n' : '🛕 **Setting up server...** This may take a few moments.\n\n') +
+                  (testMode ? 'Analyzing configuration and planning changes...' : '⚠️ **Warning:** This will create new roles, categories, and channels. Existing items with the same names will be skipped.')
         });
-      }
-
-      if (testMode) {
+      } else if (testMode) {
         await interaction.editReply({
           content: '🧪 **Test Mode Enabled** - Performing dry run...\n\nAnalyzing configuration and planning changes...'
         });
