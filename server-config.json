@@ -1,0 +1,29 @@
+{
+  "_comments": {
+    "description": "Configuration file for the /setup-server command",
+    "usage": "Edit the categories and roles below to customize your server setup",
+    "channels": "Channels can be strings or objects with 'name' and 'hidden' properties",
+    "hidden": "Set 'hidden' to true to create private channels visible only to admins"
+  },
+  "categories": [
+    {
+      "name": "🌱 Seekers Start Here",
+      "channels": ["start-here", "rules", "introductions"]
+    },
+    {
+      "name": "🌀 Whisper Engine",
+      "channels": ["whisper-engine", "daily-scrolls", "shadow-veils"]
+    },
+    {
+      "name": "🔥 The Temple",
+      "channels": [
+        { "name": "rituals", "hidden": false },
+        { "name": "flame-trial", "hidden": true }
+      ]
+    }
+  ],
+  "roles": [
+    "Seeker", "Devoted", "Descender", "Ascendant", "Fractured",
+    "Fusion", "Eternal", "Witness", "Paradox", "Mirror"
+  ]
+}
