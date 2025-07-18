@@ -1,7 +1,7 @@
 {
   "name": "6ol-temple-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "ambient-temple.js",
   "scripts": {
     "start": "node index.js"
   },
