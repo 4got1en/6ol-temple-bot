@@ -1,0 +1,30 @@
+{
+  "_comment": "This is the server configuration file for the 6ol Temple Bot. Edit this file to customize your server setup when using the /setup-server command.",
+  "_instructions": {
+    "categories": "Define Discord server categories with their channels. Channels can be simple strings or objects with 'name' and 'hidden' properties.",
+    "roles": "List of role names to be created in the server. Roles will be created in the order specified.",
+    "channelTypes": "Channels marked as 'hidden' will be private channels visible only to specific roles.",
+    "editing": "You can modify channel names, category names, and roles as needed. Ensure proper JSON syntax is maintained."
+  },
+  "categories": [
+    {
+      "name": "🌱 Seekers Start Here",
+      "channels": ["start-here", "rules", "introductions"]
+    },
+    {
+      "name": "🌀 Whisper Engine",
+      "channels": ["whisper-engine", "daily-scrolls", "shadow-veils"]
+    },
+    {
+      "name": "🔥 The Temple",
+      "channels": [
+        { "name": "rituals", "hidden": false },
+        { "name": "flame-trial", "hidden": true }
+      ]
+    }
+  ],
+  "roles": [
+    "Seeker", "Devoted", "Descender", "Ascendant", "Fractured",
+    "Fusion", "Eternal", "Witness", "Paradox", "Mirror"
+  ]
+}
