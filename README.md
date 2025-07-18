@@ -42,10 +42,13 @@ The bot uses `server-config.json` to define the server structure created by the 
 
 ### Configuration Options
 
+- **_comments**: A special object for documentation (the bot ignores this field)
 - **categories**: Array of category objects with names and channels
 - **channels**: Can be strings (public channels) or objects with `name` and `hidden` properties
 - **hidden**: When true, creates private channels visible only to administrators
 - **roles**: Array of role names to create
+
+**Note**: While JSON doesn't natively support comments, this configuration uses a special `_comments` object that the bot ignores, allowing you to include documentation within the file.
 
 ## Commands
 

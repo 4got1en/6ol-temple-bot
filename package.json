@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "ambient-temple.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ambient-temple.js",
+    "test": "node -c ambient-temple.js && echo 'Code syntax validation passed'"
   },
   "dependencies": {
     "discord.js": "^14.11.0",
