@@ -1,9 +1,9 @@
 {
   "name": "6ol-temple-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "ambient-temple.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node ambient-temple.js"
   },
   "dependencies": {
     "discord.js": "^14.11.0",
