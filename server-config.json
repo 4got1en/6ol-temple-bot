@@ -1,0 +1,69 @@
+{
+  "serverSetup": {
+    "categories": [
+      {
+        "name": "🛕 Temple Grounds",
+        "channels": [
+          {
+            "name": "temple-entrance",
+            "type": "text",
+            "description": "Welcome to the Temple"
+          },
+          {
+            "name": "temple-announcements",
+            "type": "text",
+            "description": "Important temple announcements"
+          }
+        ]
+      },
+      {
+        "name": "🕯️ Sacred Chambers",
+        "channels": [
+          {
+            "name": "meditation-hall",
+            "type": "text",
+            "description": "A place for quiet contemplation"
+          },
+          {
+            "name": "temple-voice",
+            "type": "voice",
+            "description": "Voice channel for temple gatherings"
+          }
+        ]
+      },
+      {
+        "name": "🔒 Inner Sanctum",
+        "locked": true,
+        "allowedRoles": ["Temple Keeper", "Elder"],
+        "channels": [
+          {
+            "name": "keepers-only",
+            "type": "text",
+            "description": "Private channel for temple keepers",
+            "hidden": true
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Temple Keeper",
+        "color": "#FFD700",
+        "permissions": ["MANAGE_CHANNELS", "MANAGE_MESSAGES"],
+        "hoist": true
+      },
+      {
+        "name": "Elder",
+        "color": "#CD853F",
+        "permissions": ["MANAGE_MESSAGES"],
+        "hoist": true
+      },
+      {
+        "name": "Pilgrim",
+        "color": "#DDA0DD",
+        "permissions": [],
+        "hoist": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "serverSetup": {
+    "categories": [
+      {
+        "name": "📚 Study Hall",
+        "channels": [
+          {
+            "name": "general-discussion",
+            "type": "text",
+            "description": "General academic discussions"
+          },
+          {
+            "name": "homework-help",
+            "type": "text",
+            "description": "Get help with assignments"
+          },
+          {
+            "name": "study-groups",
+            "type": "voice",
+            "description": "Voice channel for study groups"
+          }
+        ]
+      },
+      {
+        "name": "🎮 Gaming",
+        "channels": [
+          {
+            "name": "gaming-chat",
+            "type": "text",
+            "description": "Discuss your favorite games"
+          },
+          {
+            "name": "looking-for-group",
+            "type": "text",
+            "description": "Find people to play with"
+          },
+          {
+            "name": "game-night",
+            "type": "voice",
+            "description": "Voice channel for gaming sessions"
+          }
+        ]
+      },
+      {
+        "name": "🔐 Staff Only",
+        "locked": true,
+        "allowedRoles": ["Admin", "Moderator"],
+        "channels": [
+          {
+            "name": "staff-discussion",
+            "type": "text",
+            "description": "Private staff discussions",
+            "hidden": true
+          },
+          {
+            "name": "moderation-logs",
+            "type": "text",
+            "description": "Moderation action logs",
+            "hidden": true
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Admin",
+        "color": "#FF0000",
+        "permissions": ["ADMINISTRATOR"],
+        "hoist": true
+      },
+      {
+        "name": "Moderator",
+        "color": "#00FF00",
+        "permissions": ["MANAGE_MESSAGES", "KICK_MEMBERS"],
+        "hoist": true
+      },
+      {
+        "name": "Student",
+        "color": "#0099FF",
+        "permissions": [],
+        "hoist": false
+      },
+      {
+        "name": "Gamer",
+        "color": "#9966FF",
+        "permissions": [],
+        "hoist": false
+      }
+    ]
+  }
+}

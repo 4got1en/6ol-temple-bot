@@ -1,0 +1,50 @@
+{
+  "serverSetup": {
+    "categories": [
+      {
+        "name": "🎮 Gaming Hub",
+        "channels": [
+          {
+            "name": "general-gaming",
+            "type": "text",
+            "description": "General gaming discussions"
+          },
+          {
+            "name": "game-night",
+            "type": "voice",
+            "description": "Voice channel for gaming sessions"
+          }
+        ]
+      },
+      {
+        "name": "🏆 Competitive",
+        "channels": [
+          {
+            "name": "ranked-matches",
+            "type": "text",
+            "description": "Organize ranked gameplay"
+          },
+          {
+            "name": "team-strategy",
+            "type": "voice",
+            "description": "Strategy discussions"
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Pro Gamer",
+        "color": "#FFD700",
+        "permissions": [],
+        "hoist": true
+      },
+      {
+        "name": "Casual Player",
+        "color": "#87CEEB",
+        "permissions": [],
+        "hoist": false
+      }
+    ]
+  }
+}
