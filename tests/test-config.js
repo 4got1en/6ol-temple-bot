@@ -7,7 +7,7 @@ function testConfigLoading() {
   
   try {
     // Test config file exists
-    const configPath = path.join(__dirname, 'server-config.json');
+    const configPath = path.join(__dirname, '..', 'server-config.json');
     if (!fs.existsSync(configPath)) {
       throw new Error('server-config.json file not found');
     }
