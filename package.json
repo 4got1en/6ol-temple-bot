@@ -1,10 +1,20 @@
 {
   "name": "6ol-temple-bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A Discord bot for the 6ol Temple community, providing spiritual guidance and temple management features",
+  "main": "bot.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node bot.js",
+    "dev": "node bot.js"
   },
+  "keywords": [
+    "discord-bot",
+    "temple",
+    "spiritual",
+    "6ol",
+    "meditation",
+    "community"
+  ],
   "dependencies": {
     "discord.js": "^14.11.0",
     "dotenv": "^16.3.1"

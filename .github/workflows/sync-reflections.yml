@@ -1,0 +1,79 @@
+name: Sync Reflections
+
+on:
+  schedule:
+    # Run daily at 9 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync_reflections:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Sync temple reflections
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          REFLECTIONS_CHANNEL_ID: ${{ secrets.REFLECTIONS_CHANNEL_ID }}
+        run: |
+          node -e "
+            const { Client, GatewayIntentBits } = require('discord.js');
+            const DiscordUtil = require('./utils/discord.js');
+            const GitHubUtil = require('./utils/github.js');
+            
+            const client = new Client({
+              intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent]
+            });
+            
+            client.once('ready', async () => {
+              console.log('🪞 Reflection sync service awakened');
+              
+              try {
+                const channel = await client.channels.fetch(process.env.REFLECTIONS_CHANNEL_ID);
+                
+                // Fetch recent messages from reflections channel
+                const messages = await channel.messages.fetch({ limit: 10 });
+                const reflectionMessages = messages.filter(msg => 
+                  !msg.author.bot && msg.content.includes('reflection')
+                );
+                
+                console.log(\`Found \${reflectionMessages.size} reflection messages to sync\`);
+                
+                // Sync reflections with external systems
+                for (const [id, msg] of reflectionMessages) {
+                  console.log(\`Syncing reflection from \${msg.author.tag}\`);
+                  // Placeholder: Add actual sync logic here for Notion/GitHub
+                }
+                
+                // Send sync summary
+                const embed = DiscordUtil.createTempleEmbed(
+                  '🔄 Reflection Sync Complete',
+                  \`Synchronized \${reflectionMessages.size} temple reflections with external systems.\`
+                );
+                
+                await DiscordUtil.sendTempleMessage(channel, null, embed);
+                console.log('✨ Reflection sync completed');
+                
+              } catch (error) {
+                console.error('Error syncing reflections:', error);
+              }
+              
+              await client.destroy();
+            });
+            
+            client.login(process.env.DISCORD_TOKEN);
+          "

@@ -1,0 +1,62 @@
+name: Whisper Action
+
+on:
+  schedule:
+    # Run every 6 hours
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Custom whisper message'
+        required: false
+        type: string
+
+jobs:
+  send_whisper:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Send temple whisper
+        env:
+          DISCORD_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          WHISPER_CHANNEL_ID: ${{ secrets.WHISPER_CHANNEL_ID }}
+          CUSTOM_MESSAGE: ${{ github.event.inputs.message }}
+        run: |
+          node -e "
+            const { Client, GatewayIntentBits } = require('discord.js');
+            const DiscordUtil = require('./utils/discord.js');
+            
+            const client = new Client({
+              intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages]
+            });
+            
+            client.once('ready', async () => {
+              console.log('🕯️ Temple whisper bot awakened');
+              
+              const channel = await client.channels.fetch(process.env.WHISPER_CHANNEL_ID);
+              const message = process.env.CUSTOM_MESSAGE || 'The temple whispers ancient wisdom on the wind...';
+              
+              const embed = DiscordUtil.createTempleEmbed(
+                '🌸 Temple Whisper',
+                message
+              );
+              
+              await DiscordUtil.sendTempleMessage(channel, null, embed);
+              console.log('✨ Whisper sent to the temple');
+              
+              await client.destroy();
+            });
+            
+            client.login(process.env.DISCORD_TOKEN);
+          "
