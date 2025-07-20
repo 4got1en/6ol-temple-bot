@@ -10,3 +10,9 @@ services:
     envVars:
       - key: DISCORD_TOKEN
         sync: false
+      - key: GITHUB_TOKEN
+        sync: false
+      - key: DATA_VAULT_OWNER
+        value: 4got1en
+      - key: DATA_VAULT_REPO
+        value: 6ol-data-vault
